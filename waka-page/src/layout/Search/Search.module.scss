@@ -1,0 +1,18 @@
+.wrapper {
+  width: 100%;
+}
+.container {
+  background-color: #fff;
+  margin: 20px 30px;
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+//book
+.list-books {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  gap: 10%;
+}

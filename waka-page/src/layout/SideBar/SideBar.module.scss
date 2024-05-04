@@ -1,0 +1,19 @@
+.wrapper {
+  width: 100%;
+  //   position: sticky;
+  height: 100vh;
+  box-shadow: 10px 0 5px -5px rgba(0, 0, 0, 0.1);
+}
+.container-logo {
+  width: 100%;
+  padding: 20px 0px;
+  text-align: center;
+  span {
+    font-size: 30px;
+    font-weight: 700;
+    color: rgb(3, 183, 183);
+  }
+}
+.container-cate {
+  padding: 10px 30px;
+}
