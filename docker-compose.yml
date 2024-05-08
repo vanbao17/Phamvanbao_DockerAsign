@@ -49,7 +49,16 @@ services:
       - mysql_api
     networks:
       - backend
-
+  cronjob:
+    build: ./cron
+    container_name: my_cron_container
+    volumes:
+      - /usr/share/zoneinfo/Asia/Ho_Chi_Minh:/etc/localtime:ro
+    restart: unless-stopped
+    depends_on:
+      - crawl_api
+    networks:
+      - backend
 networks:
   backend:
     driver: bridge
