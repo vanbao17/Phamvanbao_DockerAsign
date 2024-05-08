@@ -3,7 +3,7 @@ version: "3.8"
 services:
   mysql:
     image: mysql:5.7
-    container_name: mysql_container # Hoặc bất kỳ phiên bản nào phù hợp với dự án của bạn
+    container_name: mysql_container
     environment:
       - MYSQL_DATABASE=BooksWaka
       - MYSQL_ROOT_PASSWORD=psw123
@@ -15,23 +15,6 @@ services:
       - ./mysql/init_db:/docker-entrypoint-initdb.d
     networks:
       - backend
-  # db:
-  #   image: mysql:latest
-  #   restart: always
-  #   environment:
-  #     - MYSQL_DATABASE=root
-  #     - MYSQL_ROOT_PASSWORD=psw123
-  #   ports:
-  #     - "6603:3306"
-  #   volumes:
-  #     - ./init_db:/docker-entrypoint-initdb.d
-  #   networks:
-  #     - pvb
-  # mysql:
-  #   container_name: mysql_container
-  #   build: ./mysql
-  #   ports:
-  #     - "6603:3306"
   mysql_api:
     container_name: mysql_api_container
     build: ./mysql_api
@@ -44,18 +27,19 @@ services:
     environment:
       FLASK_ENV: development
     networks:
+      - frontend
       - backend
   waka_page:
     container_name: waka_page
     build: ./waka-page
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - mysql_api
     volumes:
       - ./waka-page:/user/src/app
     networks:
-      - backend
+      - frontend
   crawl_api:
     container_name: crawl_api_container
     build: ./crawl_api
@@ -65,9 +49,18 @@ services:
       - mysql_api
     networks:
       - backend
+  cronjob:
+    build: ./cron
+    container_name: my_cron_container
+    volumes:
+      - /usr/share/zoneinfo/Asia/Ho_Chi_Minh:/etc/localtime:ro
+    restart: unless-stopped
+    depends_on:
+      - crawl_api
+    networks:
+      - backend
 
-# networks:
-#   pvb:
 networks:
   backend:
     driver: bridge
+  frontend:
