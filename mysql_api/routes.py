@@ -7,7 +7,6 @@ project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_dir)
 @app.route('/insert', methods=[ 'POST'])
 def insert_data():
-    # Lấy dữ liệu từ JSON request
     data = request.get_json()
     try:
         save_to_db(data)

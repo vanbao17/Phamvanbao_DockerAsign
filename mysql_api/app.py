@@ -3,11 +3,11 @@ from flask_cors import CORS
 import sys
 import os
 
-# Thiết lập thư mục dự án trong PYTHONPATH
+
 project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_dir)
 
-# Nhập các hàm từ module data
+
 from data import search_books, get_books, save_to_db
 
 app = Flask(__name__)

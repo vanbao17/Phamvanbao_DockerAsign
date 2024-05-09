@@ -15,7 +15,6 @@ from settings import MySqlDB
 def remove_accents(input_str):
     nfkd_form = unicodedata.normalize('NFKD', input_str)
     output = ''.join([c for c in nfkd_form if not unicodedata.combining(c)])
-    # Thay thế các ký tự đặc biệt còn lại
     output = output.replace('đ', 'd').replace('Đ', 'D')
     return output
 def save_to_db(data):

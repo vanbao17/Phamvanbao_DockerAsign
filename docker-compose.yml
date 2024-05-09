@@ -27,7 +27,6 @@ services:
     environment:
       FLASK_ENV: development
     networks:
-      - frontend
       - backend
   waka_page:
     container_name: waka_page
@@ -39,7 +38,7 @@ services:
     volumes:
       - ./waka-page:/user/src/app
     networks:
-      - frontend
+      - backend
   crawl_api:
     container_name: crawl_api_container
     build: ./crawl_api
@@ -62,4 +61,3 @@ services:
 networks:
   backend:
     driver: bridge
-  frontend:
